@@ -11,7 +11,7 @@ from aiohttp.client_exceptions import InvalidUrlClientError
 
 
 class MongoPipeline:
-    collection_name = "articles"
+    collection_name = "scraped_articles"
 
     def __init__(self, mongo_uri, mongo_db):
         self.mongo_uri = mongo_uri

@@ -79,15 +79,15 @@ class KpSpider(scrapy.Spider):
             "(//div[contains(@class, 'dQphFo')])[1]/a/text()"
         ).getall()
         authors = response.xpath(
-            "//div[contains(@class, 'bYtRNK')]"
+            "//div[contains(@class, 'gcyEOm')]"
             "//span[contains(@class, 'bmkpOs')]/text()"
         ).getall()
         source_url = response.url
 
         if (
             title is None or description is None or
-            article_text is None or publication_datetime is None or
-            keywords is None or authors is None or source_url is None
+            not article_text or publication_datetime is None or
+            not keywords or not authors or source_url is None
         ):
             return
 
@@ -96,6 +96,6 @@ class KpSpider(scrapy.Spider):
                            article_text="".join(article_text),
                            publication_datetime=publication_datetime,
                            header_photo_url=header_photo_url,
-                           keywords=", ".join(keywords),
-                           authors=", ".join(authors),
+                           keywords=keywords,
+                           authors=authors,
                            source_url=source_url)
